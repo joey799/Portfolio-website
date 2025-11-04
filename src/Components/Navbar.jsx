@@ -7,7 +7,7 @@ export default function Navbar() {
 
   return (
     <nav id="sidebar">
-      <NavLink to="/" end className={linkClass}>Home</NavLink>
+      <NavLink to="/home"  className={linkClass}>Home</NavLink>
       <NavLink to="/about" className={linkClass}>About Me</NavLink>
       <NavLink to="/education" className={linkClass}>Education & Work</NavLink>
       <NavLink to="/certifications" className={linkClass}>Certifications</NavLink>

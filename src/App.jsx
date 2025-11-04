@@ -21,7 +21,8 @@ export default function App() {
         <Navbar />
         <div id="page">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route index path="/" element={<Home />} />
+             <Route path="/home" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/education" element={<Education />} />
             <Route path="/certifications" element={<Certifications />} />

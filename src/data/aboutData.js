@@ -15,7 +15,7 @@ export const aboutInfo = {
       muziek, technologie en het verkennen van mijn stad Rotterdam. De stad motiveert me: de energie, diversiteit en mentaliteit 
       van "niet lullen maar poetsen" sluiten precies aan bij hoe ik werk en denk. Mijn doel is om mijn skills verder te ontwikkelen 
       in front-end en back-end development, en uiteindelijk bij te dragen aan innovatieve digitale projecten die impact maken.`,
-    image: "/src/img/joey4.jpg"
+    image: "./images/joey4.JPG"
   },
   values: [
     { id: "equality", title: "Gelijkwaardigheid" },

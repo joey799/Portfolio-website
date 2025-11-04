@@ -4,7 +4,7 @@ export const certificates = [
     title: "STC Diploma",
     school: "Scheepvaart en Transport College",
     year: "2018",
-    image: "/src/img/stc.png",
+    image: "./images/stc.png",
     description: "Diploma behaald in scheepvaarttechniek met focus op navigatie en veiligheid.",
     type: "MBO",
     duration: "4 jaar",
@@ -18,7 +18,7 @@ export const certificates = [
     description: "Diploma sport en beweging, met extra cursussen in coaching en EHBO.",
     type: "MBO",
     duration: "3 jaar",
-    image: "/src/img/albeda.png",
+    image: "./images/albeda.png",
     link: "https://example.com/albeda-diploma"
   },
 

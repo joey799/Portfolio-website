@@ -618,14 +618,14 @@ footer {
 
 
 .intellectual-card {
-  background-image: url('/src/img/Rectangle.png');
+  background-image: url('./images/Rectangle.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .creative-card {
-  background-image: url('/src/img/image 14.png');
+  background-image: url('./images/image 14.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -643,7 +643,7 @@ footer {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('/src/img/lebron.png');
+  background-image: url('./images/lebron.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -820,7 +820,7 @@ footer {
 }
 
 .intellectual-card {
-  background-image: url('/src/img/Rectangle.png');
+  background-image: url('./images/Rectangle.png');
   background-size: contain; /* of cover */
   background-position: center;
   background-repeat: no-repeat;
@@ -843,7 +843,7 @@ footer {
 
 
 .creative-card {
-  background-image: url('/src/img/image 14.png');
+  background-image: url('./images/image 14.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

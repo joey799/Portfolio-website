@@ -1,8 +1,5 @@
 import { useState } from "react";
 
-
-
-
 const Contact = () => {
   const [result, setResult] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -25,9 +22,9 @@ const Contact = () => {
 
       if (data.success) {
         setResult("Message sent successfully.");
-        event.target.reset(); 
+        event.target.reset();
       } else {
-        setResult("Something went wrong, Please try again.");
+        setResult("Something went wrong, please try again.");
       }
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -38,29 +35,110 @@ const Contact = () => {
   };
 
   return (
-    <div className="contact-container">
-      <h2>Contact Me</h2>
-      <form className="contact-form" onSubmit={onSubmit}>
-        <label htmlFor="firstName">First Name</label>
-        <input type="text" id="firstName" name="first_name" required />
+    <main className="min-h-screen bg-black text-white font-sans">
+      {/* PAGE CONTENT */}
+      <div className="pt-32 px-6 md:px-12 max-w-2xl mx-auto">
+        <h1 className="text-4xl md:text-5xl font-extrabold mb-10 text-center">
+          Contact Me
+        </h1>
 
-        <label htmlFor="lastName">Last Name</label>
-        <input type="text" id="lastName" name="last_name" required />
+        <form
+          onSubmit={onSubmit}
+          className="bg-neutral-900 p-8 rounded-xl shadow-lg space-y-6"
+        >
+          {/* First Name */}
+          <div className="flex flex-col">
+            <label
+              htmlFor="firstName"
+              className="mb-2 font-semibold text-neutral-200"
+            >
+              First Name
+            </label>
+            <input
+              type="text"
+              id="firstName"
+              name="first_name"
+              required
+              className="p-3 rounded-md bg-neutral-800 border border-neutral-700 text-white focus:border-neutral-500 focus:outline-none transition"
+            />
+          </div>
 
-        <label htmlFor="email">Email</label>
-        <input type="email" id="email" name="email" required />
+          {/* Last Name */}
+          <div className="flex flex-col">
+            <label
+              htmlFor="lastName"
+              className="mb-2 font-semibold text-neutral-200"
+            >
+              Last Name
+            </label>
+            <input
+              type="text"
+              id="lastName"
+              name="last_name"
+              required
+              className="p-3 rounded-md bg-neutral-800 border border-neutral-700 text-white focus:border-neutral-500 focus:outline-none transition"
+            />
+          </div>
 
-        <label htmlFor="message">Message</label>
-        <textarea id="message" name="message" required></textarea>
+          {/* Email */}
+          <div className="flex flex-col">
+            <label
+              htmlFor="email"
+              className="mb-2 font-semibold text-neutral-200"
+            >
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              className="p-3 rounded-md bg-neutral-800 border border-neutral-700 text-white focus:border-neutral-500 focus:outline-none transition"
+            />
+          </div>
 
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Sending..." : "Send"}
-        </button>
+          {/* Message */}
+          <div className="flex flex-col">
+            <label
+              htmlFor="message"
+              className="mb-2 font-semibold text-neutral-200"
+            >
+              Message
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              required
+              rows={5}
+              className="p-3 rounded-md bg-neutral-800 border border-neutral-700 text-white focus:border-neutral-500 focus:outline-none transition resize-none"
+            ></textarea>
+          </div>
 
-        <p className="result-message">{result}</p>
-      </form>
-    </div>
-    
+          {/* Submit Button */}
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full bg-neutral-700 hover:bg-neutral-600 text-white font-semibold py-3 rounded-md transition disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isSubmitting ? "Sending..." : "Send"}
+          </button>
+
+          {/* Result Message */}
+          {result && (
+            <p className="mt-4 text-center text-green-500 font-medium">{result}</p>
+          )}
+        </form>
+
+        {/* FOOTER */}
+{/* FOOTER */}
+<footer className="border-t border-neutral-700 py-10 text-center text-xs uppercase tracking-widest text-neutral-400 mt-32 space-y-2">
+  <div>© {new Date().getFullYear()} Joey Lourens</div>
+  <div>joeylouresns64@gmail.com</div>
+  <div>+31 6 38 09 73 91</div>
+</footer>
+
+      </div>
+    </main>
   );
 };
 

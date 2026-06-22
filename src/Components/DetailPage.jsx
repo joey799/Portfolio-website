@@ -1,12 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { projects } from "../data/projects";
 
 export default function DetailPage() {
   const location = useLocation();
   const navigate = useNavigate();
+  const [modalVideo, setModalVideo] = useState(null);
 
-  // Scroll naar hash
   useEffect(() => {
     if (location.hash) {
       const id = location.hash.replace("#", "");
@@ -18,6 +18,15 @@ export default function DetailPage() {
       }
     }
   }, [location]);
+
+  // Sluit modal met Escape
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (e.key === "Escape") setModalVideo(null);
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, []);
 
   return (
     <main className="min-h-screen bg-black text-white px-6 md:px-12 pt-48 pb-16">
@@ -31,7 +40,6 @@ export default function DetailPage() {
           ← Terug naar projecten
         </button>
 
-        {/* Titel */}
         <h1 className="text-4xl md:text-5xl font-extrabold mb-16 text-center">
           Project Details
         </h1>
@@ -47,12 +55,35 @@ export default function DetailPage() {
                 <div className="border-t border-neutral-700 mb-16" />
               )}
 
-              {/* Project afbeelding */}
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-72 object-cover rounded-lg mb-8"
-              />
+              {/* VIDEO of AFBEELDING */}
+              {project.video ? (
+                <div className="relative w-full h-72 rounded-lg overflow-hidden mb-8 group">
+                  <video
+                    src={project.video}
+                    className="w-full h-full object-cover"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                  {/* Fullscreen knop */}
+                  <button
+                    onClick={() => setModalVideo(project.video)}
+                    className="absolute bottom-3 right-3 bg-black/70 hover:bg-white hover:text-black text-white text-xs uppercase tracking-widest px-4 py-2 rounded-full border border-white transition flex items-center gap-2"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5" />
+                    </svg>
+                    Vergroot video
+                  </button>
+                </div>
+              ) : (
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-72 object-cover rounded-lg mb-8"
+                />
+              )}
 
               {/* Project titel en details */}
               <h2 className="text-3xl font-extrabold mb-4">{project.title}</h2>
@@ -80,7 +111,7 @@ export default function DetailPage() {
                 </p>
               </div>
 
-              {/* GitHub button → opent jouw profiel */}
+              {/* GitHub button */}
               <div>
                 <button
                   onClick={() => window.open("https://github.com/joey799", "_blank")}
@@ -94,6 +125,37 @@ export default function DetailPage() {
           ))}
         </div>
       </div>
+
+      {/* FULLSCREEN VIDEO MODAL */}
+      {modalVideo && (
+        <div
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+          onClick={() => setModalVideo(null)}
+        >
+          <div
+            className="relative w-full max-w-5xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Sluit knop */}
+            <button
+              onClick={() => setModalVideo(null)}
+              className="absolute -top-10 right-0 text-white text-sm uppercase tracking-widest hover:text-neutral-400 transition flex items-center gap-2"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              Sluiten
+            </button>
+
+            <video
+              src={modalVideo}
+              className="w-full rounded-lg"
+              controls
+              autoPlay
+            />
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <footer className="border-t border-neutral-700 py-10 text-center text-xs uppercase tracking-widest text-neutral-400 mt-32 space-y-2">

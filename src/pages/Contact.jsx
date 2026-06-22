@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "motion/react";
 
 const Contact = () => {
   const [result, setResult] = useState("");
@@ -17,9 +18,7 @@ const Contact = () => {
         method: "POST",
         body: formData,
       });
-
       const data = await response.json();
-
       if (data.success) {
         setResult("Message sent successfully.");
         event.target.reset();
@@ -27,82 +26,65 @@ const Contact = () => {
         setResult("Something went wrong, please try again.");
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
       setResult("Error sending message. Try again later.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  const fields = [
+    { id: "firstName", label: "First Name", name: "first_name", type: "text" },
+    { id: "lastName", label: "Last Name", name: "last_name", type: "text" },
+    { id: "email", label: "Email", name: "email", type: "email" },
+  ];
+
   return (
     <main className="min-h-screen bg-black text-white font-sans">
-      {/* PAGE CONTENT */}
       <div className="pt-32 px-6 md:px-12 max-w-2xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-extrabold mb-10 text-center">
+        <motion.h1
+          className="text-4xl md:text-5xl font-extrabold mb-10 text-center"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           Contact Me
-        </h1>
+        </motion.h1>
 
-        <form
+        <motion.form
           onSubmit={onSubmit}
           className="bg-neutral-900 p-8 rounded-xl shadow-lg space-y-6"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
-          {/* First Name */}
-          <div className="flex flex-col">
-            <label
-              htmlFor="firstName"
-              className="mb-2 font-semibold text-neutral-200"
+          {fields.map(({ id, label, name, type }, i) => (
+            <motion.div
+              key={id}
+              className="flex flex-col"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 + i * 0.08, duration: 0.4 }}
             >
-              First Name
-            </label>
-            <input
-              type="text"
-              id="firstName"
-              name="first_name"
-              required
-              className="p-3 rounded-md bg-neutral-800 border border-neutral-700 text-white focus:border-neutral-500 focus:outline-none transition"
-            />
-          </div>
+              <label htmlFor={id} className="mb-2 font-semibold text-neutral-200">
+                {label}
+              </label>
+              <input
+                type={type}
+                id={id}
+                name={name}
+                required
+                className="p-3 rounded-md bg-neutral-800 border border-neutral-700 text-white focus:border-neutral-400 focus:outline-none transition"
+              />
+            </motion.div>
+          ))}
 
-          {/* Last Name */}
-          <div className="flex flex-col">
-            <label
-              htmlFor="lastName"
-              className="mb-2 font-semibold text-neutral-200"
-            >
-              Last Name
-            </label>
-            <input
-              type="text"
-              id="lastName"
-              name="last_name"
-              required
-              className="p-3 rounded-md bg-neutral-800 border border-neutral-700 text-white focus:border-neutral-500 focus:outline-none transition"
-            />
-          </div>
-
-          {/* Email */}
-          <div className="flex flex-col">
-            <label
-              htmlFor="email"
-              className="mb-2 font-semibold text-neutral-200"
-            >
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              className="p-3 rounded-md bg-neutral-800 border border-neutral-700 text-white focus:border-neutral-500 focus:outline-none transition"
-            />
-          </div>
-
-          {/* Message */}
-          <div className="flex flex-col">
-            <label
-              htmlFor="message"
-              className="mb-2 font-semibold text-neutral-200"
-            >
+          <motion.div
+            className="flex flex-col"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.44, duration: 0.4 }}
+          >
+            <label htmlFor="message" className="mb-2 font-semibold text-neutral-200">
               Message
             </label>
             <textarea
@@ -110,33 +92,37 @@ const Contact = () => {
               name="message"
               required
               rows={5}
-              className="p-3 rounded-md bg-neutral-800 border border-neutral-700 text-white focus:border-neutral-500 focus:outline-none transition resize-none"
-            ></textarea>
-          </div>
+              className="p-3 rounded-md bg-neutral-800 border border-neutral-700 text-white focus:border-neutral-400 focus:outline-none transition resize-none"
+            />
+          </motion.div>
 
-          {/* Submit Button */}
-          <button
+          <motion.button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-neutral-700 hover:bg-neutral-600 text-white font-semibold py-3 rounded-md transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full border border-white text-white font-semibold py-3 rounded-md uppercase tracking-widest text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+            whileHover={{ backgroundColor: "#ffffff", color: "#000000" }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.2 }}
           >
             {isSubmitting ? "Sending..." : "Send"}
-          </button>
+          </motion.button>
 
-          {/* Result Message */}
           {result && (
-            <p className="mt-4 text-center text-green-500 font-medium">{result}</p>
+            <motion.p
+              className="mt-4 text-center text-green-400 font-medium"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+            >
+              {result}
+            </motion.p>
           )}
-        </form>
+        </motion.form>
 
-        {/* FOOTER */}
-{/* FOOTER */}
-<footer className="border-t border-neutral-700 py-10 text-center text-xs uppercase tracking-widest text-neutral-400 mt-32 space-y-2">
-  <div>© {new Date().getFullYear()} Joey Lourens</div>
-  <div>joeylouresns64@gmail.com</div>
-  <div>+31 6 38 09 73 91</div>
-</footer>
-
+        <footer className="border-t border-neutral-700 py-10 text-center text-xs uppercase tracking-widest text-neutral-400 mt-32 space-y-2">
+          <div>© {new Date().getFullYear()} Joey Lourens</div>
+          <div>joeylourens64@gmail.com</div>
+          <div>+31 6 38 09 73 91</div>
+        </footer>
       </div>
     </main>
   );
